@@ -21,7 +21,7 @@ export default async function CustomersPage(props: {
       <div>
         <h1 className="text-2xl font-semibold tracking-tight">Clientes</h1>
         <p className="text-muted-foreground text-sm">
-          Listado paginado de clientes obtenido desde backend.
+          Listado de clientes registrados en el sistema.
         </p>
       </div>
 
