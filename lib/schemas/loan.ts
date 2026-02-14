@@ -14,22 +14,6 @@ const optionalTrimmedString = z.preprocess(
   z.string().optional()
 )
 
-const optionalNumberFromInput = <
-  TSchema extends z.ZodType<number, z.ZodTypeDef, unknown>,
->(
-  schema: TSchema
-) =>
-  z.preprocess(
-    (value) => {
-      if (value === null || value === undefined || value === "") {
-        return undefined
-      }
-
-      return value
-    },
-    schema.optional()
-  )
-
 export const loanResponseSchema = z.object({
   id: z.uuid(),
   customerId: z.uuid(),
@@ -60,12 +44,11 @@ export const submitLoanApplicationRequestSchema = z.object({
   purpose: optionalTrimmedString.pipe(
     z.string().max(200, "El proposito no puede tener mas de 200 caracteres").optional()
   ),
-  annualInterestRate: optionalNumberFromInput(
+  annualInterestRate: 
     z.coerce
       .number()
       .min(0, "La tasa no puede ser negativa")
       .max(999.99, "La tasa no puede ser mayor a 999.99")
-  ),
 })
 
 export const reviewLoanApplicationRequestSchema = z.object({
